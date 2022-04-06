@@ -1,2 +1,4 @@
 # ignore environment variables
 .env
+
+package-lock.json
