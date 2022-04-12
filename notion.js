@@ -3,10 +3,15 @@ const { Client } = require('@notionhq/client')
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
 async function getStatus() {
-	const database = await notion.databases.retrieve( { database_id: process.env.NOTION_DATABASE_ID } )
-	return notionPropertiesById(database.properties)[process.env.NOTION_STATUS_ID].multi_select.options.map(option => {
-		return { id: option.id, name: option.name }
+	const database = await notion.databases.retrieve({ 
+		database_id: process.env.NOTION_DATABASE_ID 
 	})
+	//console.log(Object.keys(database.properties.Topics.multi_select.options))
+	console.log(database.properties.Topics.multi_select.options)
+	//console.log(notionPropertiesById(database.properties))
+	//return notionPropertiesById(database.properties.Topics.multi_select.options.map(option => {
+	// 	return { id: option.id, name: option.name }
+	//})
 }
 
 function notionPropertiesById(properties) {
@@ -38,6 +43,16 @@ function createCard({ title, status, difficulty, rating, URL, notes}) {
 					name: status
 				}
 			},
+			// [process.env.NOTION_TOPICS_ID]: {
+			// 	multi_select: [
+			// 		{
+			// 			"name": "B"
+			// 		},
+			// 		{
+			// 			"name": "C"
+			// 		}
+			// 	]
+			// },
 			[process.env.NOTION_DIFFICULTY_ID]: {
 				select: {
 					name: difficulty 
@@ -71,6 +86,7 @@ function createCard({ title, status, difficulty, rating, URL, notes}) {
 }
 
 //getStatus().then(req => console.log(req))
+getStatus()
 createCard({ 
 	title: "Leet Code Problem", 
 	status: "Confident",
