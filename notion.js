@@ -61,15 +61,15 @@ function createCard({ title, status, topics, difficulty, rating, URL, notes}) {
 			},
 			[process.env.NOTION_STATUS_ID]: {
 				select: {
-					name: status
+					id: status
 				}
 			},
-			Topics: {
+			[process.env.NOTION_TOPICS_ID]: {
 				multi_select: topics
 			},
 			[process.env.NOTION_DIFFICULTY_ID]: {
 				select: {
-					name: difficulty 
+					id: difficulty 
 				}
 			},
 			[process.env.NOTION_RATING_ID]: {
@@ -99,20 +99,20 @@ function createCard({ title, status, topics, difficulty, rating, URL, notes}) {
 	})
 }
 
-topics = [{
-	"name": "Arrays"},
-	{
-	"name": "Matrix"
-}]
-createCard({ 
-	title: "Leet Code Problem", 
-	status: "Confident",
-	topics: topics,
-	difficulty: "Easy",
-	rating: 5, 
-	URL: "you_are_doing_great.com", 
-	notes: "Keep up the good work.", 
-})
+//topics = [{
+//	"name": "Arrays"},
+//	{
+//	"name": "Matrix"
+//}]
+//createCard({ 
+//	title: "Leet Code Problem", 
+//	status: "Confident",
+//	topics: topics,
+//	difficulty: "Easy",
+//	rating: 5, 
+//	URL: "you_are_doing_great.com", 
+//	notes: "Keep up the good work.", 
+//})
 
 module.exports = {
 	getTopics,
